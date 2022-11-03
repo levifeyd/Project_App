@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GetFilmActivity extends AppCompatActivity {
-    private TextView textView;
+    private TextView recommendedFilm;
     private Button back;
 
     @Override
@@ -18,13 +18,13 @@ public class GetFilmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_film_activity);
 
-        textView = findViewById(R.id.tv_movie);
+        recommendedFilm = findViewById(R.id.tv_movie);
 
         Intent intentThatStartedThisActivity = getIntent();
 
         if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
             String textEntered= intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
-            textView.setText(textEntered);
+            recommendedFilm.setText(textEntered);
         }
         back = findViewById(R.id.b_back_button);
         back.setOnClickListener(new View.OnClickListener() {
