@@ -1,2 +1,2 @@
 # Project_App
-Implementation Andriod application MyMovie
+Implementation Andriod application MyCinema
