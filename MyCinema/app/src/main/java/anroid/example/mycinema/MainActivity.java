@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         button_start = findViewById(R.id.b_start);
         button_start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(SecondActivityIntent);
             }
         });
+
         button_exit = findViewById(R.id.b_exit);
         button_exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +39,5 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
-
     }
 }

@@ -14,19 +14,20 @@
         android:textColor="#600"
         style="@style/TextAppearance.AppCompat.Title"
         />
+
     <EditText
         android:id="@+id/et_textInput"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
         android:gravity="center_horizontal|start"
         android:hint="@string/_1_movie"
         android:padding="10dp"
-        android:textColor="#592"/>
+        android:textColor="#592" />
     <EditText
         android:id="@+id/et_textInput_2"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
         android:layout_marginLeft="20dp"
@@ -36,12 +37,34 @@
         android:textColor="#592"/>
     <EditText
         android:id="@+id/et_textInput_3"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:layout_marginLeft="20dp"
         android:gravity="center_horizontal|start"
         android:hint="@string/_3_movie"
+        android:padding="10dp"
+        android:textColor="#592"
+        />
+    <EditText
+        android:id="@+id/et_textInput_4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_horizontal|start"
+        android:hint="@string/_4_movie"
+        android:padding="10dp"
+        android:textColor="#592"
+        />
+    <EditText
+        android:id="@+id/et_textInput_5"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_horizontal|start"
+        android:hint="5. movie"
         android:padding="10dp"
         android:textColor="#592"
         />

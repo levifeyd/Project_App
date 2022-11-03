@@ -11,16 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SecondActivity extends AppCompatActivity {
-    private Button changeNextActivityFilms;
-    private Button changeNextActivitySerials;
+    private Button NextActivityFilms;
+    private Button NextActivitySerials;
     private Button button_back;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-        changeNextActivityFilms = findViewById(R.id.b_films);
-        changeNextActivityFilms.setOnClickListener(new View.OnClickListener() {
+        NextActivityFilms = findViewById(R.id.b_films);
+        NextActivityFilms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = SecondActivity.this;
@@ -30,14 +30,14 @@ public class SecondActivity extends AppCompatActivity {
              }
         });
 
-        changeNextActivitySerials = findViewById(R.id.b_serials);
-        changeNextActivitySerials.setOnClickListener(new View.OnClickListener() {
+        NextActivitySerials = findViewById(R.id.b_serials);
+        NextActivitySerials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = SecondActivity.this;
                 Class destinationActivity = ThirdActivitySerials.class;
-                Intent ThirdActivityChange = new Intent(context, destinationActivity);
-                startActivity(ThirdActivityChange);
+                Intent ActivityChange = new Intent(context, destinationActivity);
+                startActivity(ActivityChange);
             }
         });
 
@@ -47,8 +47,8 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Context context = SecondActivity.this;
                 Class destinationActivity = MainActivity.class;
-                Intent MainActivityChange = new Intent(context, destinationActivity);
-                startActivity(MainActivityChange);
+                Intent ActivityChange = new Intent(context, destinationActivity);
+                startActivity(ActivityChange);
             }
         });
     }

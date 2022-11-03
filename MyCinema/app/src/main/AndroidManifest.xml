@@ -28,6 +28,7 @@
         <activity android:name=".SecondActivity"></activity>
         <activity android:name=".ThirdActivityFilms"></activity>
         <activity android:name=".ThirdActivitySerials"></activity>
+        <activity android:name=".GetSerialActivity"></activity>
         <activity android:name=".GetFilmActivity"></activity>
     </application>
 

@@ -11,4 +11,14 @@
     <string name="serials">serials</string>
     <string name="back">BACK</string>
     <string name="please_enter_serials">Please enter serials</string>
+    <string name="recomendated_movie">Recomendated movie</string>
+    <string name="_1_serials">1. serials</string>
+    <string name="_2_serial">2. serial</string>
+    <string name="_3_serial">3. serial</string>
+    <string name="movies">movies</string>
+    <string name="recommended_serial">Recommended_serial</string>
+    <string name="recommended_movie">Recommended movie</string>
+    <string name="_4_movie">4. movie</string>
+    <string name="_4_serial">4. serial</string>
+    <string name="_5_serial">5. serial</string>
 </resources>

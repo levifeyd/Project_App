@@ -9,16 +9,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GetFilmActivity extends AppCompatActivity {
+public class GetSerialActivity extends AppCompatActivity {
     private TextView textView;
     private Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.get_film_activity);
+        setContentView(R.layout.get_serial_activity);
 
-        textView = findViewById(R.id.tv_movie);
+        textView = findViewById(R.id.tv_serial);
 
         Intent intentThatStartedThisActivity = getIntent();
 
@@ -30,11 +30,12 @@ public class GetFilmActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = GetFilmActivity.this;
-                Class destinationActivity = ThirdActivityFilms.class;
+                Context context = GetSerialActivity.this;
+                Class destinationActivity = ThirdActivitySerials.class;
                 Intent ThirdActivityChange = new Intent(context, destinationActivity);
                 startActivity(ThirdActivityChange);
             }
         });
     }
+
 }

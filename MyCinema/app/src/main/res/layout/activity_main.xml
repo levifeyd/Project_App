@@ -25,9 +25,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="142dp"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
         android:padding="16dp"
-        android:text="Hello World!" />
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#600"
+        android:text="Hello my friend!" />
 
 </FrameLayout>

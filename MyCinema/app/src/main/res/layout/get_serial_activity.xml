@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/tv_movie"
+        android:id="@+id/tv_serial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="250dp"
-        android:text="@string/recommended_movie"
+        android:text="@string/recommended_serial"
         android:textColor="#690"/>
     <Button
         android:id="@+id/b_back_button"
