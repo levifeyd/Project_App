@@ -49,6 +49,7 @@ public class SecondActivity extends AppCompatActivity {
                 Class destinationActivity = MainActivity.class;
                 Intent ActivityChange = new Intent(context, destinationActivity);
                 startActivity(ActivityChange);
+                finish();
             }
         });
     }

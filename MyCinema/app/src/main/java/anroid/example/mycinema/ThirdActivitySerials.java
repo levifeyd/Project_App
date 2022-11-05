@@ -78,6 +78,7 @@ public class ThirdActivitySerials extends AppCompatActivity {
                 Class destinationActivity = SecondActivity.class;
                 Intent SecondActivityChange = new Intent(context, destinationActivity);
                 startActivity(SecondActivityChange);
+                finish();
             }
         });
     }

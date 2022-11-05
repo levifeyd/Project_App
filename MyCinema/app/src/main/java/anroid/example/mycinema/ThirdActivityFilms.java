@@ -6,78 +6,91 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ThirdActivityFilms extends AppCompatActivity {
-    private Button changeNextActivity;
-    private Button changeNextActivityBack;
-    private EditText selectedFilm_1;
-    private EditText selectedFilm_2;
-    private EditText selectedFilm_3;
-    private EditText selectedFilm_4;
-    private EditText selectedFilm_5;
+    private Button button_back;
+    private List<View> allEds;
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.third_acivity_films);
 
-        changeNextActivity = findViewById(R.id.b_save);
-        selectedFilm_1 = findViewById(R.id.et_textInput);
-        selectedFilm_2 = findViewById(R.id.et_textInput_2);
-        selectedFilm_3 = findViewById(R.id.et_textInput_3);
-        selectedFilm_4 = findViewById(R.id.et_textInput_4);
-        selectedFilm_5 = findViewById(R.id.et_textInput_5);
+        Button changeNextActivity = (Button) findViewById(R.id.button_add);
+        //инициализировали наш массив с edittext
+        allEds = new ArrayList<View>();
 
+        //находим наш linear который у нас под кнопкой add edittext в activity_main.xml
+        final LinearLayout linear = (LinearLayout) findViewById(R.id.linear);
         changeNextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String film = selectedFilms();
-                if (film != null) {
-                    Context context = ThirdActivityFilms.this;
-                    Class destinationActivity = GetFilmActivity.class;
-                    Intent GetFilmActivityChange = new Intent(context, destinationActivity);
+            public void onClick(View v) {
+                counter++;
+                //берем наш кастомный лейаут находим через него все наши кнопки и едит тексты, задаем нужные данные
+                final View view = getLayoutInflater().inflate(R.layout.custom_layout, null);
+                Button deleteField = (Button) view.findViewById(R.id.button2);
+                EditText text = (EditText) view.findViewById(R.id.editText);
+                text.setText("Some movie");
+                //добавляем все что создаем в массив
+                allEds.add(view);
+                //добавляем елементы в linearlayout
+                linear.addView(view);
 
-                    GetFilmActivityChange.putExtra(Intent.EXTRA_TEXT, film);
-                    startActivity(GetFilmActivityChange);
-                } else {
-                    Context context = ThirdActivityFilms.this;
-                    Toast toast = Toast.makeText (context, "Please enter all position for movies", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }
-            public String selectedFilms() {
-                String[] films = new String[5];
-                String result = null;
-                int position = (int)(Math.random() * 5);
-
-                films[0] = selectedFilm_1.getText().toString();
-                films[1] = selectedFilm_2.getText().toString();
-                films[2] = selectedFilm_3.getText().toString();
-                films[3] = selectedFilm_4.getText().toString();
-                films[4] = selectedFilm_5.getText().toString();
-
-                if (notEmpty(films[0]) && notEmpty(films[1]) && notEmpty(films[2])
-                        && notEmpty(films[3]) && notEmpty(films[4])) {
-                    result = films[position];
-                }
-                return result;
-            }
-            public boolean notEmpty(String film) {
-                return !(film.equals(""));
+                deleteField.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            //получаем родительский view и удаляем его
+                            ((LinearLayout) view.getParent()).removeView(view);
+                            //удаляем эту же запись из массива что бы не оставалось мертвых записей
+                            allEds.remove(view);
+                        } catch(IndexOutOfBoundsException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
-        changeNextActivityBack = findViewById(R.id.b_back);
-        changeNextActivityBack.setOnClickListener(new View.OnClickListener() {
+        Button showDataBtn = (Button) findViewById(R.id.button_random);
+        showDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                //преобразуем наш ArrayList в просто String Array
+                String[] items = new String[allEds.size()];
+                //запускаем чтение всех елементов этого списка и запись в массив
+                for (int i = 0; i < allEds.size(); i++) {
+                    items[i] = ((EditText) allEds.get(i).findViewById(R.id.editText)).getText().toString();
+                }
+
+                Context context = ThirdActivityFilms.this;
+                Class destinationActivity = GetFilmActivity.class;
+                Intent SecondActivityChange = new Intent(context, destinationActivity);
+                SecondActivityChange.putExtra(Intent.EXTRA_TEXT, selectFilmRandom(items));
+                startActivity(SecondActivityChange);
+            }
+            public String selectFilmRandom(String[] src) {
+                int position = (int)(Math.random() * counter);
+                return src[position];
+            }
+        });
+        button_back = findViewById(R.id.b_back);
+        button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+             public void onClick(View view) {
                 Context context = ThirdActivityFilms.this;
                 Class destinationActivity = SecondActivity.class;
                 Intent SecondActivityChange = new Intent(context, destinationActivity);
                 startActivity(SecondActivityChange);
+                finish();
             }
         });
     }
