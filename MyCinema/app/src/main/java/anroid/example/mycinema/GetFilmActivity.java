@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GetFilmActivity extends AppCompatActivity {
     private TextView recommendedFilm;
-    private Button back;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,8 @@ public class GetFilmActivity extends AppCompatActivity {
             String textEntered= intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
             recommendedFilm.setText(textEntered);
         }
-        back = findViewById(R.id.b_back_button);
-        back.setOnClickListener(new View.OnClickListener() {
+        backButton = findViewById(R.id.b_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = GetFilmActivity.this;

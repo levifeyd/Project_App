@@ -6,72 +6,75 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ThirdActivitySerials extends AppCompatActivity {
-    private Button changeNextActivity;
-    private Button changeNextActivityBack;
-    private EditText selectedSerial_1;
-    private EditText selectedSerial_2;
-    private EditText selectedSerial_3;
-    private EditText selectedSerial_4;
-    private EditText selectedSerial_5;
+    private Button button_back;
+    private List<View> allEds;
+    private ArrayList<View> allSerials;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.third_activity_serilas);
 
-        changeNextActivity = findViewById(R.id.b_save_serial);
+        Button changeNextActivity = (Button) findViewById(R.id.button_add);
+        //инициализировали наш массив с edittext
+        allSerials = new ArrayList<View>();
 
-        selectedSerial_1 = findViewById(R.id.et_textInput);
-        selectedSerial_2 = findViewById(R.id.et_textInput_2);
-        selectedSerial_3 = findViewById(R.id.et_textInput_3);
-        selectedSerial_4 = findViewById(R.id.et_textInput_4);
-        selectedSerial_5 = findViewById(R.id.et_textInput_5);
-
+        //находим наш linear который у нас под кнопкой add edittext в activity_main.xml
+        final LinearLayout linear = (LinearLayout) findViewById(R.id.linear);
         changeNextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String serial = selectedSerial();
-                if (serial != null) {
-                    Context context = ThirdActivitySerials.this;
-                    Class destinationActivity = GetSerialActivity.class;
-                    Intent GetSerialActivityChange = new Intent(context, destinationActivity);
-                    GetSerialActivityChange.putExtra(Intent.EXTRA_TEXT, serial);
-                    startActivity(GetSerialActivityChange);
-                } else {
-                    Context context = ThirdActivitySerials.this;
-                    Toast toast = Toast.makeText (context, "Please enter all position for serials", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }
-            public String selectedSerial() {
-                String[] serials = new String[5];
-                String result = null;
-                int position = (int)(Math.random() * 5);
+            public void onClick(View v) {
+                //берем наш кастомный лейаут находим через него все наши кнопки и едит тексты, задаем нужные данные
+                final View view = getLayoutInflater().inflate(R.layout.custom_layout, null);
+                Button deleteField = (Button) view.findViewById(R.id.button_delete);
+                EditText text = (EditText) view.findViewById(R.id.editText);
+                text.setText("Some serial");
+                //добавляем все что создаем в массив
+                allSerials.add(view);
+                //добавляем елементы в linearlayout
+                linear.addView(view);
 
-                serials[0] = selectedSerial_1.getText().toString();
-                serials[1] = selectedSerial_2.getText().toString();
-                serials[2] = selectedSerial_3.getText().toString();
-                serials[3] = selectedSerial_4.getText().toString();
-                serials[4] = selectedSerial_5.getText().toString();
 
-                if (notEmpty(serials[0]) && notEmpty(serials[1]) && notEmpty(serials[2])
-                        && notEmpty(serials[3]) && notEmpty(serials[4])) {
-                    result = serials[position];
-                }
-                return result;
-            }
-            public boolean notEmpty(String serial) {
-                return !(serial.equals(""));
+                deleteField.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            //получаем родительский view и удаляем его
+                            ((LinearLayout) view.getParent()).removeView(view);
+                            //удаляем эту же запись из массива что бы не оставалось мертвых записей
+                            allSerials.remove(view);
+                        } catch(IndexOutOfBoundsException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
-        changeNextActivityBack = findViewById(R.id.b_back_serial);
-        changeNextActivityBack.setOnClickListener(new View.OnClickListener() {
+        Button showDataBtn = (Button) findViewById(R.id.button_random);
+        showDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (int)(Math.random() * allSerials.size());
+                String result = ((EditText) allSerials.get(position).findViewById(R.id.editText)).getText().toString();
+
+                Context context = ThirdActivitySerials.this;
+                Class destinationActivity = GetSerialActivity.class;
+                Intent SecondActivityChange = new Intent(context, destinationActivity);
+                SecondActivityChange.putExtra(Intent.EXTRA_TEXT, result);
+                startActivity(SecondActivityChange);
+            }
+        });
+        button_back = findViewById(R.id.b_back_button);
+        button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = ThirdActivitySerials.this;

@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button_start;
-    private Button button_exit;
+    private Button buttonStart;
+    private Button buttonExit;
 
 
     @Override
@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button_start = findViewById(R.id.b_start);
-        button_start.setOnClickListener(new View.OnClickListener() {
+        buttonStart = findViewById(R.id.b_start);
+        buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = MainActivity.this;
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_exit = findViewById(R.id.b_exit);
-        button_exit.setOnClickListener(new View.OnClickListener() {
+        buttonExit = findViewById(R.id.b_exit);
+        buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = MainActivity.this;

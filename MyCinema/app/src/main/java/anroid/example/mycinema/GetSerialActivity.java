@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GetSerialActivity extends AppCompatActivity {
-    private TextView textView;
+    private TextView recommendedSerial;
     private Button back;
 
     @Override
@@ -18,13 +18,13 @@ public class GetSerialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_serial_activity);
 
-        textView = findViewById(R.id.tv_serial);
+        recommendedSerial = findViewById(R.id.tv_serial);
 
         Intent intentThatStartedThisActivity = getIntent();
 
         if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
             String textEntered= intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
-            textView.setText(textEntered);
+            recommendedSerial.setText(textEntered);
         }
         back = findViewById(R.id.b_back_button);
         back.setOnClickListener(new View.OnClickListener() {

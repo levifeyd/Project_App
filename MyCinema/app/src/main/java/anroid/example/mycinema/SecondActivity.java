@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SecondActivity extends AppCompatActivity {
     private Button NextActivityFilms;
     private Button NextActivitySerials;
-    private Button button_back;
+    private Button buttonBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +41,8 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-        button_back = findViewById(R.id.b_back);
-        button_back.setOnClickListener(new View.OnClickListener() {
+        buttonBack = findViewById(R.id.b_back);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = SecondActivity.this;
