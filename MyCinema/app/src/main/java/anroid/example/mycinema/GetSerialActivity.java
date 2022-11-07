@@ -31,7 +31,7 @@ public class GetSerialActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Context context = GetSerialActivity.this;
-                Class destinationActivity = ThirdActivitySerials.class;
+                Class destinationActivity = SerialsActivity.class;
                 Intent ThirdActivityChange = new Intent(context, destinationActivity);
                 startActivity(ThirdActivityChange);
             }

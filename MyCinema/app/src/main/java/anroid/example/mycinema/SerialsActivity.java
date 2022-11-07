@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdActivitySerials extends AppCompatActivity {
+public class SerialsActivity extends AppCompatActivity {
     private Button button_back;
     private List<View> allEds;
     private ArrayList<View> allSerials;
@@ -21,7 +21,7 @@ public class ThirdActivitySerials extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.third_activity_serilas);
+        setContentView(R.layout.serials_activity);
 
         Button changeNextActivity = (Button) findViewById(R.id.button_add);
         //инициализировали наш массив с edittext
@@ -66,7 +66,7 @@ public class ThirdActivitySerials extends AppCompatActivity {
                 int position = (int)(Math.random() * allSerials.size());
                 String result = ((EditText) allSerials.get(position).findViewById(R.id.editText)).getText().toString();
 
-                Context context = ThirdActivitySerials.this;
+                Context context = SerialsActivity.this;
                 Class destinationActivity = GetSerialActivity.class;
                 Intent SecondActivityChange = new Intent(context, destinationActivity);
                 SecondActivityChange.putExtra(Intent.EXTRA_TEXT, result);
@@ -77,8 +77,8 @@ public class ThirdActivitySerials extends AppCompatActivity {
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = ThirdActivitySerials.this;
-                Class destinationActivity = SecondActivity.class;
+                Context context = SerialsActivity.this;
+                Class destinationActivity = SelectFilmsOrSerialsActivity.class;
                 Intent SecondActivityChange = new Intent(context, destinationActivity);
                 startActivity(SecondActivityChange);
                 finish();

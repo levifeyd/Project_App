@@ -5,7 +5,7 @@
     android:paddingLeft="100dp"
     android:paddingRight="100dp"
     android:paddingTop="10dp"
-    tools:context=".ThirdActivityFilms"
+    tools:context=".FilmsActivity"
     >
     <Button
         android:id="@+id/b_back_button"

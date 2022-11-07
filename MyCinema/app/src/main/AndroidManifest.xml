@@ -25,9 +25,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".ThirdActivityFilms"></activity>
-        <activity android:name=".ThirdActivitySerials"></activity>
+        <activity android:name=".SelectFilmsOrSerialsActivity"></activity>
+        <activity android:name=".FilmsActivity"></activity>
+        <activity android:name=".SerialsActivity"></activity>
         <activity android:name=".GetSerialActivity"></activity>
         <activity android:name=".GetFilmActivity"></activity>
     </application>

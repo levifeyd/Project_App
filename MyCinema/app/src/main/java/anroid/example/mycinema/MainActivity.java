@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Context context = MainActivity.this;
-                Class destinationActivity = SecondActivity.class;
+                Class destinationActivity = SelectFilmsOrSerialsActivity.class;
                 Intent SecondActivityIntent = new Intent(context, destinationActivity);
                 startActivity(SecondActivityIntent);
             }
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Context context = MainActivity.this;
-                Class destinationActivity = SecondActivity.class;
+                Class destinationActivity = SelectFilmsOrSerialsActivity.class;
                 Intent SecondActivityIntent = new Intent(context, destinationActivity);
                 System.exit(0);
             }

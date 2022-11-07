@@ -31,7 +31,7 @@ public class GetFilmActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Context context = GetFilmActivity.this;
-                Class destinationActivity = ThirdActivityFilms.class;
+                Class destinationActivity = FilmsActivity.class;
                 Intent ThirdActivityChange = new Intent(context, destinationActivity);
                 startActivity(ThirdActivityChange);
             }

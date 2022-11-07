@@ -10,21 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class SecondActivity extends AppCompatActivity {
+public class SelectFilmsOrSerialsActivity extends AppCompatActivity {
     private Button NextActivityFilms;
     private Button NextActivitySerials;
     private Button buttonBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.second_activity);
+        setContentView(R.layout.select_films_serials_activity);
 
         NextActivityFilms = findViewById(R.id.b_films);
         NextActivityFilms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = SecondActivity.this;
-                Class destinationActivity = ThirdActivityFilms.class;
+                Context context = SelectFilmsOrSerialsActivity.this;
+                Class destinationActivity = FilmsActivity.class;
                 Intent ThirdActivityChange = new Intent(context, destinationActivity);
                 startActivity(ThirdActivityChange);
              }
@@ -34,8 +34,8 @@ public class SecondActivity extends AppCompatActivity {
         NextActivitySerials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = SecondActivity.this;
-                Class destinationActivity = ThirdActivitySerials.class;
+                Context context = SelectFilmsOrSerialsActivity.this;
+                Class destinationActivity = SerialsActivity.class;
                 Intent ActivityChange = new Intent(context, destinationActivity);
                 startActivity(ActivityChange);
             }
@@ -45,7 +45,7 @@ public class SecondActivity extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = SecondActivity.this;
+                Context context = SelectFilmsOrSerialsActivity.this;
                 Class destinationActivity = MainActivity.class;
                 Intent ActivityChange = new Intent(context, destinationActivity);
                 startActivity(ActivityChange);
