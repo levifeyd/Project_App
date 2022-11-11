@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="anroid.example.mycinema.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/selectFilmsOrSerialsActivity"
+        android:name="anroid.example.mycinema.SelectFilmsOrSerialsActivity"
+        android:label="select_films_serials_activity"
+        tools:layout="@layout/select_films_serials_activity" />
+    <activity
+        android:id="@+id/filmsActivity"
+        android:name="anroid.example.mycinema.FilmsActivity"
+        android:label="serials_activity"
+        tools:layout="@layout/serials_activity" />
+    <activity
+        android:id="@+id/serialsActivity"
+        android:name="anroid.example.mycinema.SerialsActivity"
+        android:label="SerialsActivity" />
+    <activity
+        android:id="@+id/getFilmActivity"
+        android:name="anroid.example.mycinema.GetFilmActivity"
+        android:label="GetFilmActivity" />
+    <activity
+        android:id="@+id/getSerialActivity"
+        android:name="anroid.example.mycinema.GetSerialActivity"
+        android:label="GetSerialActivity" />
+</navigation>
