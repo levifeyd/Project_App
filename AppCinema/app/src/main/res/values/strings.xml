@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">my_nav_final</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text">text</string>
+    <string name="recommended_movie">Recommended movie</string>
+    <string name="back">BACK</string>
+</resources>
