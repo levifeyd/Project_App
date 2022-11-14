@@ -5,7 +5,7 @@
     android:paddingLeft="100dp"
     android:paddingRight="100dp"
     android:paddingTop="10dp"
-    tools:context=".Fragment3"
+    tools:context=".AddMovieFragment"
     >
     <Button
         android:id="@+id/b_back_button_f3"

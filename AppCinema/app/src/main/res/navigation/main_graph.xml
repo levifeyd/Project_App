@@ -7,34 +7,34 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="android.example.AppCinema.Fragment1"
+        android:name="android.example.AppCinema.CreateRoomFragment"
         android:label="fragment_1"
-        tools:layout="@layout/fragment_1" >
+        tools:layout="@layout/create_room_fragment" >
         <action
             android:id="@+id/action_fragment1_to_fragment2"
             app:destination="@id/fragment2" />
     </fragment>
     <fragment
         android:id="@+id/fragment2"
-        android:name="android.example.AppCinema.Fragment2"
+        android:name="android.example.AppCinema.SelectFilmSerialFragment"
         android:label="fragment_2"
-        tools:layout="@layout/fragment_2" >
+        tools:layout="@layout/select_film_serial" >
         <action
             android:id="@+id/action_fragment2_to_fragment3"
             app:destination="@id/fragment3" />
     </fragment>
     <fragment
         android:id="@+id/fragment3"
-        android:name="android.example.AppCinema.Fragment3"
+        android:name="android.example.AppCinema.AddMovieFragment"
         android:label="fragment_3"
-        tools:layout="@layout/fragment_3" >
+        tools:layout="@layout/add_movie_fragment" >
         <action
             android:id="@+id/action_fragment3_to_fragment4"
             app:destination="@id/fragment4" />
     </fragment>
     <fragment
         android:id="@+id/fragment4"
-        android:name="android.example.AppCinema.Fragment4"
+        android:name="android.example.AppCinema.GetMovieFragment"
         android:label="fragment_4"
-        tools:layout="@layout/fragment_4" />
+        tools:layout="@layout/get_movie_fragment" />
 </navigation>
