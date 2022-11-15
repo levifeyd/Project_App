@@ -1,3 +1,2 @@
 /build
-/src/androidTest/java/android/example/AppCinema.*
-/.debug
+/src/debug
