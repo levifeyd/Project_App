@@ -14,16 +14,23 @@ import android.widget.TextView;
 
 public class GetMovieFragment extends Fragment {
     private NavController navController;
-
+    TextView recommendedFilm;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         navController= NavHostFragment.findNavController(this);
         View rootView = inflater.inflate(R.layout.get_movie_fragment, container, false);
 
-        TextView recommendedFilm = rootView.findViewById(R.id.tv_movie);
+        recommendedFilm = rootView.findViewById(R.id.tv_movie);
+        setResultToTextViewFromBundle();
 
+        Button button_back = rootView.findViewById(R.id.b_back_button_f4);
+        button_back.setOnClickListener(view -> navController.popBackStack());
+
+        return rootView;
+    }
+
+    private void setResultToTextViewFromBundle() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             String result = bundle.getString("string");
@@ -31,10 +38,5 @@ public class GetMovieFragment extends Fragment {
         } else {
             recommendedFilm.setText("Error");
         }
-
-        Button button_back = rootView.findViewById(R.id.b_back_button_f4);
-        button_back.setOnClickListener(view -> navController.popBackStack());
-
-        return rootView;
     }
 }
