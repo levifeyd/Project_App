@@ -20,7 +20,7 @@ public class CreateRoomFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.create_room_fragment, container, false);
         navController= NavHostFragment.findNavController(this);
 
-        Button button_next = (Button) rootView.findViewById(R.id.b_start);
+        Button button_next = rootView.findViewById(R.id.b_start);
         button_next.setOnClickListener(view -> navController.navigate(R.id.fragment2));
         return rootView;
     }

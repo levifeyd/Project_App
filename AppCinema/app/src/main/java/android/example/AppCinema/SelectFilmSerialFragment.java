@@ -23,8 +23,8 @@ public class SelectFilmSerialFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.select_film_serial, container, false);
 
-        Button button_next = (Button) rootView.findViewById(R.id.b_films);
-        Button button_back = (Button) rootView.findViewById(R.id.b_back_f2);
+        Button button_next = rootView.findViewById(R.id.b_films);
+        Button button_back = rootView.findViewById(R.id.b_back_f2);
         navController= NavHostFragment.findNavController(this);
 
         button_next.setOnClickListener(view -> navController.navigate(R.id.fragment3));
