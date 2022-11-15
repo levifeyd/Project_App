@@ -82,7 +82,8 @@ public class AddMovieFragment extends Fragment {
         Toast toast = Toast.makeText(activityObj, "Please add movie", Toast.LENGTH_SHORT);
         toast.show();
     }
-    private void sendStringToGetMovieFragment(){
+
+    private void sendStringToGetMovieFragment() {
         int position = (int)(Math.random() * allMovies.size());
         String result = ((EditText) allMovies.get(position).findViewById(R.id.editText)).getText().toString();
         AddMovieFragment fragment3 = new AddMovieFragment();

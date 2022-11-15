@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class SelectFilmSerialFragment extends Fragment {
-    NavController navController;
+    private NavController navController;
 
 
     @SuppressLint("ResourceType")
