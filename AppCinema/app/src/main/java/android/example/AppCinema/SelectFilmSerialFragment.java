@@ -1,6 +1,5 @@
 package android.example.AppCinema;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,12 +14,9 @@ import android.widget.Button;
 public class SelectFilmSerialFragment extends Fragment {
     private NavController navController;
 
-
-    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.select_film_serial, container, false);
 
         Button button_next = rootView.findViewById(R.id.b_films);
@@ -29,7 +25,6 @@ public class SelectFilmSerialFragment extends Fragment {
 
         button_next.setOnClickListener(view -> navController.navigate(R.id.fragment3));
         button_back.setOnClickListener(view -> navController.popBackStack());
-
         return rootView;
     }
 }
