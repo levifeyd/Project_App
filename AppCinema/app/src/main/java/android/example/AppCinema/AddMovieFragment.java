@@ -37,7 +37,7 @@ public class AddMovieFragment extends Fragment {
         ClickOfButtonsOfCustomLayout(linear);
 
         randomButton = rootView.findViewById(R.id.button_random);
-        ClickRandomButton();
+        clickRandomButton();
 
         Button button_back = rootView.findViewById(R.id.b_back_button_f3);
         button_back.setOnClickListener(view -> navController.popBackStack());
@@ -55,7 +55,7 @@ public class AddMovieFragment extends Fragment {
         });
     }
 
-    private void ClickRandomButton() {  // берем рандомную строку из списка строк и передадим ее в следующий фрагмент
+    private void clickRandomButton() {  // берем рандомную строку из списка строк и передадим ее в следующий фрагмент
         randomButton.setOnClickListener(view -> {
             if (allMovies.size() != 0) {
                 sendStringToGetMovieFragment();

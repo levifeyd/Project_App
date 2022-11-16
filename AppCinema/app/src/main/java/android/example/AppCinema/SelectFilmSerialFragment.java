@@ -15,8 +15,7 @@ public class SelectFilmSerialFragment extends Fragment {
     private NavController navController;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.select_film_serial, container, false);
 
         Button button_next = rootView.findViewById(R.id.b_films);
