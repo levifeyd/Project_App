@@ -11,8 +11,8 @@
         android:label="fragment_1"
         tools:layout="@layout/create_room_fragment" >
         <action
-            android:id="@+id/action_fragment1_to_fragment2"
-            app:destination="@id/fragment2" />
+            android:id="@+id/action_fragment1_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment2"
@@ -37,4 +37,13 @@
         android:name="android.example.AppCinema.GetMovieFragment"
         android:label="fragment_4"
         tools:layout="@layout/get_movie_fragment" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="android.example.AppCinema.AuthorizationFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/authorization_fragment" >
+        <action
+            android:id="@+id/action_blankFragment_to_fragment2"
+            app:destination="@id/fragment2" />
+    </fragment>
 </navigation>

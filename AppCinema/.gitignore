@@ -1,5 +1,6 @@
 *.iml
 .gradle
+.settings
 .idea
 /local.properties
 /.idea/caches
@@ -11,6 +12,10 @@
 .DS_Store
 /build
 /captures
+/app/build
+/app/src/debug
+/app/src/test
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/test/java/android/example/AppCinema/
