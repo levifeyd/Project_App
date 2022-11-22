@@ -55,8 +55,6 @@ public class AuthorizationFragment extends Fragment {
 
     private void containUserInfoDataBase() {
         dataBaseUsers.put("Qwerty1", "qwerty@mail.ru");
-        dataBaseUsers.put("Asdfgh1", "asdfgh@mail.ru");
-        dataBaseUsers.put("Zxcvbn1", "zxcvbn@mail.ru");
     }
 
     private boolean containDigit(String src) {
