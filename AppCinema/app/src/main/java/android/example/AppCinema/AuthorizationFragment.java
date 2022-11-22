@@ -9,49 +9,47 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class AuthorizationFragment extends Fragment {
     NavController navController;
     EditText mail;
     EditText password;
     HashMap<String, String> dataBaseUsers;
-    FrameLayout root;
+    RelativeLayout root;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.authorization_fragment, container, false);
         navController = NavHostFragment.findNavController(this);
         dataBaseUsers = new HashMap<>();
-
         containUserInfoDataBase();
 
-        root = rootView.findViewById(R.id.root);
+        root = rootView.findViewById(R.id.root_element);
         mail = rootView.findViewById(R.id.login);
-        password = rootView.findViewById(R.id.password);
+        password = rootView.findViewById(R.id.pass);
         password.setTransformationMethod(new PasswordTransformationMethod());
 
-        Button button_next = rootView.findViewById(R.id.sign_in);
+        Button button_next = rootView.findViewById(R.id.buttomSignIn);
         button_next.setOnClickListener(view -> authorization());
 
-        Button button_back = rootView.findViewById(R.id.button_back);
+        Button button_back = rootView.findViewById(R.id.text_button_back);
         button_back.setOnClickListener(view -> navController.popBackStack());
 
-        Button button_registr = rootView.findViewById(R.id.registration);
-        button_registr.setOnClickListener(view -> createUsers());
-
+        Button button_register = rootView.findViewById(R.id.buttomRegister);
+        button_register.setOnClickListener(view -> createUsers());
         return rootView;
     }
 
@@ -62,47 +60,38 @@ public class AuthorizationFragment extends Fragment {
     }
 
     private boolean containDigit(String src) {
-        char[] array = src.toCharArray();  // fix
         boolean result = false;
-        for (int i = 0; i < src.length(); i++) {
-            if (array[i] >= 48 && array[i] <= 57) result = true;
+        for (int i = 0 ; i < src.length(); i++) {
+            if (src.charAt(i) >= 48 && src.charAt(i) <= 57) result = true;
         }
-//        boolean result = false;
-//        for (int i = 0 ; i < src.length(); i++) {
-//            if (src.getIndex())
-//        }
         return result;
     }
 
     private boolean containUpRegister(String src) {
-        char[] array = src.toCharArray();  // getIndex() refactor
         boolean result = false;
         for (int i = 0; i < src.length(); i++) {
-            if (array[i] >= 65 && array[i] <= 90) result = true;
+            if (src.charAt(i) >= 65 && src.charAt(i) >= 90) result = true;
         }
         return result;
     }
 
-    private void showToast() {
+    private void showToastLoginOrPass() {
         Activity activityObj = this.getActivity();
-        @SuppressLint("ShowToast")
-        Toast toast = Toast.makeText(activityObj, "Incorrect password", Toast.LENGTH_SHORT);
+        @SuppressLint("showToastLoginOrPass")
+        Toast toast = Toast.makeText(activityObj, "Incorrect password or login", Toast.LENGTH_SHORT);
         toast.show();
     }
 
     private boolean checkContainInDataBaseUser(String pass) {
-        return pass.length() > 5 && containDigit(pass)
-                && containUpRegister(pass)
-                && (dataBaseUsers.containsKey(pass) && (dataBaseUsers.get(pass) != null));
+        return dataBaseUsers.containsKey(pass) && (dataBaseUsers.get(pass) != null);
     }
 
     private void authorization() {
-        String passString = password.getText().toString();
-        if (checkContainInDataBaseUser(passString)) {
+        if (checkContainInDataBaseUser(password.getText().toString())) {
             navController.navigate(R.id.fragment2);
             setNullOnFieldPassAndMail();
         } else {
-            showToast();
+            showToastLoginOrPass();
         }
     }
 
@@ -113,8 +102,8 @@ public class AuthorizationFragment extends Fragment {
 
     private void createUsers() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(requireContext()); // context it this argument (getContext)=requireContext
-        dialog.setTitle("Зарегистрироваться");
-        dialog.setMessage("Введите все данные для регистрации");
+        dialog.setTitle("Registration");
+        dialog.setMessage("Please enter your email, password and name."+"\nPassword must contain letters, numbers and capital letters!");
 
         LayoutInflater inflater = LayoutInflater.from(getContext()); // создаем объект и работаем с этим же классом( this)
 
@@ -123,33 +112,42 @@ public class AuthorizationFragment extends Fragment {
 
         final EditText email_new = register_window.findViewById(R.id.emailField);
         final EditText pass_new = register_window.findViewById(R.id.passField);
-        final EditText name_new = register_window.findViewById(R.id.nameField);
+        pass_new.setTransformationMethod(new PasswordTransformationMethod());
+
+        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss());
+        dialog.setPositiveButton("Create", (dialogInterface, which) -> clickCreate(email_new, pass_new));
         dialog.show();
-
-        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> {
-            dialogInterface.dismiss(); // dialog will close
-        });
-
-        dialog.setPositiveButton("Create", (dialogInterface, which) -> {
-            if (TextUtils.isEmpty(email_new.getText().toString())) {
-                Snackbar.make(root, "Please enter your email", Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-            if (TextUtils.isEmpty(name_new.getText().toString())) {
-                Snackbar.make(root, "Please enter your name", Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-            if (TextUtils.isEmpty(pass_new.getText().toString())) {
-                Snackbar.make(root, "Please enter your password", Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-            if (!containDigit(pass_new.getText().toString()) || !containUpRegister(pass_new.getText().toString())) {
-                Snackbar.make(root, "Please enter your password, more than 5 symbol and contain  at least one number", Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-            /// registration
-            dataBaseUsers.put(pass_new.getText().toString(), email_new.getText().toString());
-            Snackbar.make(root, "User create !", Snackbar.LENGTH_SHORT).show();
-        });
     }
+
+    private boolean checkEmail(String email_new) {
+        boolean result = false;
+        int flag = 0;
+        for (int i = 0; i < email_new.length(); i++) {
+            if (email_new.charAt(i) == 64 || email_new.charAt(i) == 46) flag++;
+        }
+        if (flag == 2) result = true;
+        return result;
+    }
+
+    private boolean checkPassword(String pass_new) {
+        return containDigit(pass_new) && containUpRegister(pass_new) && (!pass_new.isEmpty());
+    }
+
+    private void clickCreate(EditText email_new, EditText pass_new) {
+        if (!checkEmail(email_new.getText().toString())) {
+            Snackbar.make(root, "Please enter correct email", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        if (!checkPassword(pass_new.getText().toString())) {
+            Snackbar.make(root, "Please enter correct password", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        dataBaseUsers.put(pass_new.getText().toString(), email_new.getText().toString());         /// registration
+        Snackbar.make(root, "User create !", Snackbar.LENGTH_SHORT).show();
+    }
+//    private void printDataBase() {
+//        for (Map.Entry <String, String> item : dataBaseUsers.entrySet()) {
+//            System.out.println("key - " + item.getKey() + " ; value - " + item.getValue());
+//        }
+//    }
 }
