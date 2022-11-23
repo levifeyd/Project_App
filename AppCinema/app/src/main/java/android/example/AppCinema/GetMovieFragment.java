@@ -26,7 +26,6 @@ public class GetMovieFragment extends Fragment {
 
         Button button_back = rootView.findViewById(R.id.b_back_button_f4);
         button_back.setOnClickListener(view -> navController.popBackStack());
-
         return rootView;
     }
 

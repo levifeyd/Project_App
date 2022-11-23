@@ -98,8 +98,7 @@ public class AuthorizationFragment extends Fragment {
     private void createUsers() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(requireContext()); // context it this argument (getContext)=requireContext
         dialog.setTitle("Registration");
-        dialog.setMessage("Please enter your email, password and name." +
-                "\nPassword must contain letters, numbers and capital letters!");
+        dialog.setMessage("Please enter your email, password and name." + "\nPassword must contain letters, numbers and capital letters!");
         LayoutInflater inflater = LayoutInflater.from(getContext()); // создаем объект и работаем с этим же классом( this)
         View register_window = inflater.inflate(R.layout.registration_layout, null);  // получаем шаблон , который на основе класса View
         dialog.setView(register_window); // установливаем внутренний шаблон
@@ -108,10 +107,7 @@ public class AuthorizationFragment extends Fragment {
         EditText pass_new = register_window.findViewById(R.id.passField);
         pass_new.setTransformationMethod(new PasswordTransformationMethod());
 
-        dialog.setNegativeButton(
-                "Cancel",
-                (dialogInterface, which) -> dialogInterface.dismiss()
-        );
+        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss());
         dialog.setPositiveButton("Create", (dialogInterface, which) -> clickCreate(email_new, pass_new));
         dialog.show();
     }
