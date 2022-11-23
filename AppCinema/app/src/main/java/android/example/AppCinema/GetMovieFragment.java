@@ -32,7 +32,7 @@ public class GetMovieFragment extends Fragment {
 
     private void setResultToTextViewFromBundle() {
         Bundle bundle = getArguments();
-            String result = bundle.getString("string");
+            String result = bundle.getString("movie");
             if (!result.isEmpty()) recommendedFilm.setText(result);
             else recommendedFilm.setText("Error: Please enter correct name of movie");
     }

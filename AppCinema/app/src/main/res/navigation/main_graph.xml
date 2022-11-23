@@ -27,7 +27,7 @@
         android:id="@+id/fragment3"
         android:name="android.example.AppCinema.AddMovieFragment"
         android:label="fragment_3"
-        tools:layout="@layout/add_movie_fragment" >
+        tools:layout="@layout/add_movie_fragment">
         <action
             android:id="@+id/action_fragment3_to_fragment4"
             app:destination="@id/fragment4" />

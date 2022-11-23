@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class AuthorizationFragment extends Fragment {
     NavController navController;
@@ -34,7 +33,6 @@ public class AuthorizationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.authorization_fragment, container, false);
         navController = NavHostFragment.findNavController(this);
-        dataBaseUsers = new HashMap<>();
         containUserInfoDataBase();
 
         root = rootView.findViewById(R.id.root_element);
@@ -54,23 +52,22 @@ public class AuthorizationFragment extends Fragment {
     }
 
     private void containUserInfoDataBase() {
+        dataBaseUsers = new HashMap<>();
         dataBaseUsers.put("Qwerty1", "qwerty@mail.ru");
     }
 
     private boolean containDigit(String src) {
-        boolean result = false;
-        for (int i = 0 ; i < src.length(); i++) {
-            if (src.charAt(i) >= 48 && src.charAt(i) <= 57) result = true;
+        for (int i = 0; i < src.length(); i++) {
+            if (Character.isDigit(src.charAt(i))) return true;
         }
-        return result;
+        return false;
     }
 
     private boolean containUpRegister(String src) {
-        boolean result = false;
         for (int i = 0; i < src.length(); i++) {
-            if (src.charAt(i) >= 65 && src.charAt(i) >= 90) result = true;
+            if (Character.isUpperCase(src.charAt(i))) return true;
         }
-        return result;
+        return false;
     }
 
     private void showToastLoginOrPass() {
@@ -101,18 +98,20 @@ public class AuthorizationFragment extends Fragment {
     private void createUsers() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(requireContext()); // context it this argument (getContext)=requireContext
         dialog.setTitle("Registration");
-        dialog.setMessage("Please enter your email, password and name."+"\nPassword must contain letters, numbers and capital letters!");
-
+        dialog.setMessage("Please enter your email, password and name." +
+                "\nPassword must contain letters, numbers and capital letters!");
         LayoutInflater inflater = LayoutInflater.from(getContext()); // создаем объект и работаем с этим же классом( this)
-
         View register_window = inflater.inflate(R.layout.registration_layout, null);  // получаем шаблон , который на основе класса View
         dialog.setView(register_window); // установливаем внутренний шаблон
 
-        final EditText email_new = register_window.findViewById(R.id.emailField);
-        final EditText pass_new = register_window.findViewById(R.id.passField);
+        EditText email_new = register_window.findViewById(R.id.emailField);
+        EditText pass_new = register_window.findViewById(R.id.passField);
         pass_new.setTransformationMethod(new PasswordTransformationMethod());
 
-        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss());
+        dialog.setNegativeButton(
+                "Cancel",
+                (dialogInterface, which) -> dialogInterface.dismiss()
+        );
         dialog.setPositiveButton("Create", (dialogInterface, which) -> clickCreate(email_new, pass_new));
         dialog.show();
     }
@@ -121,7 +120,7 @@ public class AuthorizationFragment extends Fragment {
         boolean result = false;
         int flag = 0;
         for (int i = 0; i < email_new.length(); i++) {
-            if (email_new.charAt(i) == 64 || email_new.charAt(i) == 46) flag++;
+            if (email_new.charAt(i) == '@' || email_new.charAt(i) == '.') flag++;
         }
         if (flag == 2) result = true;
         return result;
