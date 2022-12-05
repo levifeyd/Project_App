@@ -1,7 +1,7 @@
 package android.example.AppCinema;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.example.AppCinema.dataBase.MyDbManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -28,20 +28,19 @@ public class AuthorizationFragment extends Fragment {
     EditText password;
     HashMap<String, String> dataBaseUsers;
     RelativeLayout root;
+    private MyDbManager myDbManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.authorization_fragment, container, false);
         navController = NavHostFragment.findNavController(this);
-        containUserInfoDataBase();
+        initButtonsMailPass(rootView);
 
-        root = rootView.findViewById(R.id.root_element);
-        mail = rootView.findViewById(R.id.login);
-        password = rootView.findViewById(R.id.pass);
-        password.setTransformationMethod(new PasswordTransformationMethod());
+        myDbManager = new MyDbManager(getContext());
+        myDbManager.openDb();
 
-        Button button_next = rootView.findViewById(R.id.buttomSignIn);
-        button_next.setOnClickListener(view -> authorization());
+        Button signIn = rootView.findViewById(R.id.buttomSignIn);
+        signIn.setOnClickListener(view -> authorization());
 
         Button button_back = rootView.findViewById(R.id.text_button_back);
         button_back.setOnClickListener(view -> navController.popBackStack());
@@ -51,9 +50,11 @@ public class AuthorizationFragment extends Fragment {
         return rootView;
     }
 
-    private void containUserInfoDataBase() {
-        dataBaseUsers = new HashMap<>();
-        dataBaseUsers.put("Qwerty1", "qwerty@mail.ru");
+    private void initButtonsMailPass(View rootView) {
+        root = rootView.findViewById(R.id.root_element);
+        mail = rootView.findViewById(R.id.login);
+        password = rootView.findViewById(R.id.pass);
+        password.setTransformationMethod(new PasswordTransformationMethod());
     }
 
     private boolean containDigit(String src) {
@@ -72,17 +73,22 @@ public class AuthorizationFragment extends Fragment {
 
     private void showToastLoginOrPass() {
         Activity activityObj = this.getActivity();
-        @SuppressLint("showToastLoginOrPass")
         Toast toast = Toast.makeText(activityObj, "Incorrect password or login", Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    private boolean checkContainInDataBaseUser(String pass) {
-        return dataBaseUsers.containsKey(pass) && (dataBaseUsers.get(pass) != null);
+//    private boolean checkContainInDataBaseUser(String password) {
+//        return dataBaseUsers.containsKey(password) && (dataBaseUsers.get(password) != null);
+//    }
+    private boolean checkContainInDataBase(String password, String email) {
+        String passwordFromDb = myDbManager.getFromDb(email);
+        if (passwordFromDb!=null)
+            return passwordFromDb.equals(password);
+        else return false;
     }
 
     private void authorization() {
-        if (checkContainInDataBaseUser(password.getText().toString())) {
+        if (checkContainInDataBase(password.getText().toString(), mail.getText().toString())) {
             navController.navigate(R.id.fragment2);
             setNullOnFieldPassAndMail();
         } else {
@@ -127,6 +133,7 @@ public class AuthorizationFragment extends Fragment {
     }
 
     private void clickCreate(EditText email_new, EditText pass_new) {
+
         if (!checkEmail(email_new.getText().toString())) {
             Snackbar.make(root, "Please enter correct email", Snackbar.LENGTH_SHORT).show();
             return;
@@ -135,12 +142,12 @@ public class AuthorizationFragment extends Fragment {
             Snackbar.make(root, "Please enter correct password", Snackbar.LENGTH_SHORT).show();
             return;
         }
-        dataBaseUsers.put(pass_new.getText().toString(), email_new.getText().toString());         /// registration
-        Snackbar.make(root, "User create !", Snackbar.LENGTH_SHORT).show();
+        if (myDbManager.getFromDb(email_new.getText().toString()) == null) {
+            myDbManager.insertToDb(email_new.getText().toString(), pass_new.getText().toString());
+            Snackbar.make(root, "User create !", Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(root, "User with same email already exist!", Snackbar.LENGTH_SHORT).show();
+        }
+
     }
-//    private void printDataBase() {
-//        for (Map.Entry <String, String> item : dataBaseUsers.entrySet()) {
-//            System.out.println("key - " + item.getKey() + " ; value - " + item.getValue());
-//        }
-//    }
 }
