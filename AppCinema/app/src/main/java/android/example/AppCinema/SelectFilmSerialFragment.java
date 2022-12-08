@@ -20,7 +20,7 @@ public class SelectFilmSerialFragment extends Fragment {
 
         Button button_next = rootView.findViewById(R.id.b_films);
         Button button_back = rootView.findViewById(R.id.b_back_f2);
-        navController= NavHostFragment.findNavController(this);
+        navController = NavHostFragment.findNavController(this);
 
         button_next.setOnClickListener(view -> navController.navigate(R.id.fragment3));
         button_back.setOnClickListener(view -> navController.popBackStack());

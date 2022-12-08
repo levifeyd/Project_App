@@ -27,25 +27,23 @@ public class MyDbManager {
 
     public String getFromDb(String email){
         db.execSQL(dataBase.TABLE_STRUCTURE);
-        Cursor c;
         String password = null;
-        String sqlQuery = "select email, password "
-                + "from " + dataBase.TABLE_NAME
-                + " where email = ?";
-        c = db.rawQuery(sqlQuery, new String[] {email});
-        if (c != null) {
-            if (c.moveToFirst()) {
-                password = c.getString(1);
+        String sqlQuery = "select email, password " + "from " + dataBase.TABLE_NAME +
+                " where email = ?";
+        Cursor cursor = db.rawQuery(sqlQuery, new String[] {email});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                password = cursor.getString(1);
             }
-            c.close();
+            cursor.close();
         }
-
         return password;
     }
+
     public void closeDb(){
         db.close();
-//        MyDbHelper.close();
     }
+
     public void dropDb(){
         Cursor c = db.rawQuery("DROP TABLE " + dataBase.TABLE_NAME, new String[] {});
         c.close();

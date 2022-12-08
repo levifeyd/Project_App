@@ -1,7 +1,6 @@
 package android.example.AppCinema;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,16 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 public class AddMovieFragment extends Fragment {
     private NavController navController;
-    private ArrayList<View> allMovies;
+    private ArrayList<View> allMovies; // delete
     private Button button_add;
     private Button randomButton;
     private Button deleteField;
@@ -37,7 +34,7 @@ public class AddMovieFragment extends Fragment {
         ClickOfButtonsOfCustomLayout(linear);
 
         randomButton = rootView.findViewById(R.id.button_random);
-        clickRandomButton();
+        randomButton.setOnClickListener(v -> navController.navigate(R.id.fragment4));
 
         Button button_back = rootView.findViewById(R.id.b_back_button_f3);
         button_back.setOnClickListener(view -> navController.popBackStack());
@@ -55,15 +52,6 @@ public class AddMovieFragment extends Fragment {
         });
     }
 
-    private void clickRandomButton() {  // берем рандомную строку из списка строк и передадим ее в следующий фрагмент
-        randomButton.setOnClickListener(view -> {
-            if (allMovies.size() != 0) {
-                sendStringToGetMovieFragment();
-            } else {
-                showToast();
-            }
-        });
-    }
 
     private  void clickDelete(View view) {
         deleteField.setOnClickListener(v1 -> {
@@ -76,19 +64,15 @@ public class AddMovieFragment extends Fragment {
         });
     }
 
-    private void showToast () {
-        Activity activityObj = this.getActivity();
-        Toast toast = Toast.makeText(activityObj, "Please add movie", Toast.LENGTH_SHORT);
-        toast.show();
-    }
+//    private void showToast () {
+//        Activity activityObj = this.getActivity();
+//        Toast toast = Toast.makeText(activityObj, "Please add movie", Toast.LENGTH_SHORT);
+//        toast.show();
+//    }
 
-    private void sendStringToGetMovieFragment() {
-        int position = (int)(Math.random() * allMovies.size());
-        String result = ((EditText) allMovies.get(position).findViewById(R.id.editText)).getText().toString();
-        AddMovieFragment fragment3 = new AddMovieFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("movie", result);
-        fragment3.setArguments(bundle);
-        navController.navigate(R.id.fragment4, bundle);
-    }
+//    private void sendStringToGetMovieFragment() {
+//        int position = (int)(Math.random() * allMovies.size());
+//        Bundle bundle = new Bundle();
+//        navController.navigate(R.id.fragment4, bundle);
+//    }
 }

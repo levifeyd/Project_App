@@ -20,15 +20,14 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.HashMap;
 
 public class AuthorizationFragment extends Fragment {
-    NavController navController;
-    EditText mail;
-    EditText password;
-    HashMap<String, String> dataBaseUsers;
-    RelativeLayout root;
+    private NavController navController;
+    private EditText mail;
+    private EditText password;
     private MyDbManager myDbManager;
+
+    private RelativeLayout root;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,12 +76,9 @@ public class AuthorizationFragment extends Fragment {
         toast.show();
     }
 
-//    private boolean checkContainInDataBaseUser(String password) {
-//        return dataBaseUsers.containsKey(password) && (dataBaseUsers.get(password) != null);
-//    }
     private boolean checkContainInDataBase(String password, String email) {
         String passwordFromDb = myDbManager.getFromDb(email);
-        if (passwordFromDb!=null)
+        if (passwordFromDb != null)
             return passwordFromDb.equals(password);
         else return false;
     }
@@ -133,7 +129,6 @@ public class AuthorizationFragment extends Fragment {
     }
 
     private void clickCreate(EditText email_new, EditText pass_new) {
-
         if (!checkEmail(email_new.getText().toString())) {
             Snackbar.make(root, "Please enter correct email", Snackbar.LENGTH_SHORT).show();
             return;
