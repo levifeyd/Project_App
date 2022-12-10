@@ -18,11 +18,7 @@
         android:id="@+id/fragment2"
         android:name="android.example.AppCinema.SelectFilmSerialFragment"
         android:label="fragment_2"
-        tools:layout="@layout/select_film_serial" >
-        <action
-            android:id="@+id/action_fragment2_to_fragment3"
-            app:destination="@id/fragment3" />
-    </fragment>
+        tools:layout="@layout/select_film_serial" />
     <fragment
         android:id="@+id/fragment3"
         android:name="android.example.AppCinema.AddMovieFragment"
@@ -43,7 +39,7 @@
         android:label="fragment_blank"
         tools:layout="@layout/authorization_fragment" >
         <action
-            android:id="@+id/action_blankFragment_to_fragment2"
-            app:destination="@id/fragment2" />
+            android:id="@+id/action_blankFragment_to_fragment3"
+            app:destination="@id/fragment3" />
     </fragment>
 </navigation>

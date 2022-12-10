@@ -15,4 +15,14 @@
     <string name="email">Введите email</string>
     <string name="pass">Введите пароль</string>
     <string name="name">Введите ваше имя</string>
+    <string name="movie">Movie</string>
+    <string name="serial">Serial</string>
+    <string name="please_choose_year">Please choose year</string>
+    <string name="since">Since</string>
+    <string name="until">Until</string>
+    <string name="please_choose_a_movie_category">Please сhoose a movie category</string>
+    <string name="get_movie">get movie</string>
+    <string name="random_selection">Random selection</string>
+    <string name="back_button">back</string>
+    <string name="log_out">log out</string>
 </resources>

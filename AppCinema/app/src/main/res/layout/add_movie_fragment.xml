@@ -6,57 +6,38 @@
     android:paddingRight="100dp"
     android:paddingTop="10dp"
     tools:context=".AddMovieFragment"
-    android:background="@drawable/bg"
+    android:background="#79111100"
     >
-    <Button
-        android:id="@+id/b_back_button_f3"
-        android:text="back"
-        android:layout_marginTop="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"/>
-    <Button
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Random selection"
-        android:id="@+id/button_random"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/b_back_button_f3"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="520dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/please_choose_a_movie_category"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button_add"
-        android:layout_width="300dp"
+        android:id="@+id/radio_b_movie"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_random"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-        android:text="Add movie" />
-    <ScrollView
-        android:layout_below="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="470dp"
+        android:text="@string/movie" />
 
-        <LinearLayout
-            android:id="@+id/linear"
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_add"
-            android:layout_alignEnd="@+id/button_add"
-            android:layout_alignRight="@+id/button_add">
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/radio_b_serial"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="420dp"
+        android:text="@string/serial" />
 
     <TextView
         android:id="@+id/textView"
@@ -64,50 +45,71 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="384dp"
-        android:gravity="center"
-        android:text="Please сhoose a movie category"
+        android:layout_marginBottom="380dp"
+        android:text="@string/please_choose_year"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
-    <RadioButton
-        android:id="@+id/radio_b_comedy"
-        android:layout_width="240dp"
+    <EditText
+        android:id="@+id/since_year"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/my_icon"
-        android:text="Comedy" />
+        android:hint="@string/since"
+        android:gravity="center"
+        android:inputType="text" />
 
-    <RadioButton
-        android:id="@+id/radio_b_comedy_detective"
-        android:layout_width="240dp"
+    <EditText
+        android:id="@+id/until_year"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="190dp"
-        android:background="@drawable/my_icon"
-        android:text="Detective" />
-
-    <RadioButton
-        android:id="@+id/radio_b_thriller"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="130dp"
         android:background="@drawable/my_icon"
-        android:text="Thriller" />
-    <RadioButton
-        android:id="@+id/radio_b_action"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="70dp"
-        android:background="@drawable/my_icon"
-        android:text="Action" />
+        android:hint="@string/until"
+        android:gravity="center"
+        android:inputType="text" />
 
+    <Button
+        android:id="@+id/b_back_button_f3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_random"
+        android:layout_alignParentEnd="true"
+        android:text="@string/back_button" />
+
+    <Button
+        android:id="@+id/b_back_log_out"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_random"
+        android:layout_marginTop="1dp"
+        android:text="@string/log_out" />
+
+    <Button
+        android:id="@+id/button_random"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_selection"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="450dp"
+        />
+
+    <Button
+        android:id="@+id/button_get_movie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_movie"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="400dp"
+        />
 
 </RelativeLayout>

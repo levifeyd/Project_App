@@ -1,6 +1,5 @@
 package android.example.AppCinema;
-
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,68 +10,84 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddMovieFragment extends Fragment {
     private NavController navController;
-    private ArrayList<View> allMovies; // delete
-    private Button button_add;
-    private Button randomButton;
-    private Button deleteField;
+    private String categoryMovie;
+    private EditText yearSince;
+    private EditText yearUntil;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.add_movie_fragment, container, false);
         navController= NavHostFragment.findNavController(this);
-        allMovies = new ArrayList<>();  //инициализировали наш массив с edittext
-        final LinearLayout linear = rootView.findViewById(R.id.linear);
 
-        button_add = rootView.findViewById(R.id.button_add);
-        ClickOfButtonsOfCustomLayout(linear);
+        yearSince = rootView.findViewById(R.id.since_year);
+        yearUntil = rootView.findViewById(R.id.until_year);
+        Button movie = rootView.findViewById(R.id.radio_b_movie);
+        Button serial = rootView.findViewById(R.id.radio_b_serial);
 
-        randomButton = rootView.findViewById(R.id.button_random);
+        movie.setOnClickListener(v -> categoryMovie = "movie");
+        serial.setOnClickListener(v-> categoryMovie = "typeNumber");
+
+        Button randomButton = rootView.findViewById(R.id.button_random);
         randomButton.setOnClickListener(v -> navController.navigate(R.id.fragment4));
+
+        Button getMovieButton = rootView.findViewById(R.id.button_get_movie);
+        getMovieButton.setOnClickListener(v -> sendFilters());
 
         Button button_back = rootView.findViewById(R.id.b_back_button_f3);
         button_back.setOnClickListener(view -> navController.popBackStack());
+
+        Button log_out = rootView.findViewById(R.id.b_back_log_out);
+        log_out.setOnClickListener(v -> navController.popBackStack());
         return rootView;
     }
 
-    private void ClickOfButtonsOfCustomLayout(LinearLayout linear){  // в кастомном layout находим кнопки и делаем обработку нажатий
-        button_add.setOnClickListener(v -> {
-            @SuppressLint("InflateParams")
-            final View view = getLayoutInflater().inflate(R.layout.custom_layout, null);  //берем наш кастомный лейаут находим через него все наши кнопки, задаем нужные данные
-            deleteField = view.findViewById(R.id.button_delete);
-            allMovies.add(view);  //добавляем все что создаем в массив
-            linear.addView(view);  //добавляем елементы в linearlayout
-            clickDelete(view);
-        });
+    private void sendFilters() {
+        String sinceYearString = yearSince.getText().toString();
+        String untilYearString = yearUntil.getText().toString();
+        if (checkFilters(sinceYearString, untilYearString)) {  // if date of movie or serial correct
+            Bundle bundle = new Bundle();
+
+            bundle.putString("sinceYearString", sinceYearString);
+            bundle.putString("untilYearString", untilYearString);
+            bundle.putString("movieOrSerial", categoryMovie);
+
+            AddMovieFragment fragment3 = new AddMovieFragment();
+            fragment3.setArguments(bundle);
+            navController.navigate(R.id.fragment4, bundle);
+        } else {
+            showToastLoginOrPass();
+        }
+
+    }
+    private boolean checkFilters(String sinceYearString, String untilYearString) {
+        return checkLengthFilters(sinceYearString, untilYearString)
+                && (checkCorrectDate(sinceYearString) && checkCorrectDate(untilYearString))
+                && (checkCorrectNumberDate(sinceYearString) &&checkCorrectNumberDate(untilYearString));
     }
 
+    private boolean checkLengthFilters(String sinceYearString, String untilYearString) {
+        return sinceYearString.length() == 4 && untilYearString.length() == 4;
+    }
 
-    private  void clickDelete(View view) {
-        deleteField.setOnClickListener(v1 -> {
-            try {
-                ((LinearLayout) view.getParent()).removeView(view);  //получаем родительский view и удаляем его
-                allMovies.remove(view); //удаляем эту же запись из массива что бы не оставалось мертвых записей
-            } catch (IndexOutOfBoundsException ex) {
-                ex.printStackTrace();
+    private boolean checkCorrectNumberDate(String src) { // if year is 20.. or 19....
+        return ((src.charAt(0) == '2' && src.charAt(1) == '0') || (src.charAt(0) == '1' && src.charAt(1) =='9'));
+    }
+
+    private boolean checkCorrectDate(String src) { // if contain letter
+            for (int i = 0; i < src.length(); i++) {
+                if (!Character.isDigit(src.charAt(i)))
+                    return false;
             }
-        });
+            return true;
     }
-
-//    private void showToast () {
-//        Activity activityObj = this.getActivity();
-//        Toast toast = Toast.makeText(activityObj, "Please add movie", Toast.LENGTH_SHORT);
-//        toast.show();
-//    }
-
-//    private void sendStringToGetMovieFragment() {
-//        int position = (int)(Math.random() * allMovies.size());
-//        Bundle bundle = new Bundle();
-//        navController.navigate(R.id.fragment4, bundle);
-//    }
+    private void showToastLoginOrPass() {
+        Activity activityObj = this.getActivity();
+        Toast toast = Toast.makeText(activityObj, "Incorrect year of movie or serial", Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }

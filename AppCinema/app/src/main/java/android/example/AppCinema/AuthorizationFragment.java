@@ -77,15 +77,16 @@ public class AuthorizationFragment extends Fragment {
     }
 
     private boolean checkContainInDataBase(String password, String email) {
-        String passwordFromDb = myDbManager.getFromDb(email);
-        if (passwordFromDb != null)
-            return passwordFromDb.equals(password);
-        else return false;
+        return true;
+//        String passwordFromDb = myDbManager.getFromDb(email);
+//        if (passwordFromDb != null)
+//            return passwordFromDb.equals(password);
+//        else return false;
     }
 
     private void authorization() {
         if (checkContainInDataBase(password.getText().toString(), mail.getText().toString())) {
-            navController.navigate(R.id.fragment2);
+            navController.navigate(R.id.fragment3);
             setNullOnFieldPassAndMail();
         } else {
             showToastLoginOrPass();
