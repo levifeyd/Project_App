@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class AddMovieFragment extends Fragment {
     private NavController navController;
     private String categoryMovie;
@@ -49,28 +50,31 @@ public class AddMovieFragment extends Fragment {
     private void sendFilters() {
         String sinceYearString = yearSince.getText().toString();
         String untilYearString = yearUntil.getText().toString();
-        if (checkFilters(sinceYearString, untilYearString)) {  // if date of movie or serial correct
-            Bundle bundle = new Bundle();
+        if (checkCategory()) {
+            if (checkFilters(sinceYearString, untilYearString)) {  // if date of movie or serial correct
+                Bundle bundle = new Bundle();
+                bundle.putString("sinceYearString", sinceYearString);
+                bundle.putString("untilYearString", untilYearString);
+                bundle.putString("movieOrSerial", categoryMovie);
 
-            bundle.putString("sinceYearString", sinceYearString);
-            bundle.putString("untilYearString", untilYearString);
-            bundle.putString("movieOrSerial", categoryMovie);
-
-            AddMovieFragment fragment3 = new AddMovieFragment();
-            fragment3.setArguments(bundle);
-            navController.navigate(R.id.fragment4, bundle);
+                AddMovieFragment fragment3 = new AddMovieFragment();
+                fragment3.setArguments(bundle);
+                navController.navigate(R.id.fragment4, bundle);
+            } else {
+                showToastDate();
+            }
         } else {
-            showToastLoginOrPass();
+            showToastCategory();
         }
 
     }
-    private boolean checkFilters(String sinceYearString, String untilYearString) {
-        return checkLengthFilters(sinceYearString, untilYearString)
-                && (checkCorrectDate(sinceYearString) && checkCorrectDate(untilYearString))
+    private boolean checkFilters(String sinceYearString, String untilYearString) {  // example 1990-2002
+        return checkLengthDate(sinceYearString, untilYearString)
+                && (checkCorrectDate(sinceYearString, untilYearString))
                 && (checkCorrectNumberDate(sinceYearString) &&checkCorrectNumberDate(untilYearString));
     }
 
-    private boolean checkLengthFilters(String sinceYearString, String untilYearString) {
+    private boolean checkLengthDate(String sinceYearString, String untilYearString) {
         return sinceYearString.length() == 4 && untilYearString.length() == 4;
     }
 
@@ -78,16 +82,27 @@ public class AddMovieFragment extends Fragment {
         return ((src.charAt(0) == '2' && src.charAt(1) == '0') || (src.charAt(0) == '1' && src.charAt(1) =='9'));
     }
 
-    private boolean checkCorrectDate(String src) { // if contain letter
-            for (int i = 0; i < src.length(); i++) {
-                if (!Character.isDigit(src.charAt(i)))
-                    return false;
-            }
-            return true;
+    private boolean checkCorrectDate(String startYear, String endYear) { // start <= end
+        int start = Integer.parseInt(startYear);
+        int end = Integer.parseInt(endYear);
+            return start <= end;
     }
-    private void showToastLoginOrPass() {
+
+    private void showToastDate() {
         Activity activityObj = this.getActivity();
-        Toast toast = Toast.makeText(activityObj, "Incorrect year of movie or serial", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(activityObj, "Incorrect year of movie or serial\n" +
+                "Example: 1999-2005", Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private void showToastCategory() {
+        Activity activityObj = this.getActivity();
+        Toast toast = Toast.makeText(activityObj, "Please choose category movie or serial",
+                Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    private boolean checkCategory() {
+        return categoryMovie != null;
     }
 }

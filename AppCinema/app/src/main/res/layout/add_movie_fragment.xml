@@ -61,7 +61,7 @@
         android:background="@drawable/my_icon"
         android:hint="@string/since"
         android:gravity="center"
-        android:inputType="text" />
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/until_year"
@@ -74,7 +74,7 @@
         android:background="@drawable/my_icon"
         android:hint="@string/until"
         android:gravity="center"
-        android:inputType="text" />
+        android:inputType="date" />
 
     <Button
         android:id="@+id/b_back_button_f3"
