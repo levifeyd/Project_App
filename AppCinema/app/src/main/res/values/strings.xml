@@ -5,4 +5,14 @@
     <string name="text">text</string>
     <string name="recommended_movie">Recommended movie</string>
     <string name="back">BACK</string>
+    <string name="please_enter_your_login">Please enter your login</string>
+    <string name="please_enter_your_password">Please enter your password</string>
+    <string name="registration">registration</string>
+    <string name="please_login_to_your_account">Please login to your account</string>
+    <string name="text_bootom">Ввойдите в свою учетную запись </string>
+    <string name="sign">войти</string>
+    <string name="Reg">Регистрация</string>
+    <string name="email">Введите email</string>
+    <string name="pass">Введите пароль</string>
+    <string name="name">Введите ваше имя</string>
 </resources>

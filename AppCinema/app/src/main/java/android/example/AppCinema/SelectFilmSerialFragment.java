@@ -24,6 +24,9 @@ public class SelectFilmSerialFragment extends Fragment {
 
         button_next.setOnClickListener(view -> navController.navigate(R.id.fragment3));
         button_back.setOnClickListener(view -> navController.popBackStack());
+
+        Button button_log_out = rootView.findViewById(R.id.b_log_out);
+        button_log_out.setOnClickListener(v -> navController.popBackStack());
         return rootView;
     }
 }

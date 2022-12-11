@@ -21,7 +21,7 @@ public class CreateRoomFragment extends Fragment {
         navController= NavHostFragment.findNavController(this);
 
         Button button_next = rootView.findViewById(R.id.b_start);
-        button_next.setOnClickListener(view -> navController.navigate(R.id.fragment2));
+        button_next.setOnClickListener(view -> navController.navigate(R.id.blankFragment));
         return rootView;
     }
 }

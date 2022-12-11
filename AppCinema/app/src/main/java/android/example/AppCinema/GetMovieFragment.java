@@ -26,13 +26,12 @@ public class GetMovieFragment extends Fragment {
 
         Button button_back = rootView.findViewById(R.id.b_back_button_f4);
         button_back.setOnClickListener(view -> navController.popBackStack());
-
         return rootView;
     }
 
     private void setResultToTextViewFromBundle() {
         Bundle bundle = getArguments();
-            String result = bundle.getString("string");
+            String result = bundle.getString("movie");
             if (!result.isEmpty()) recommendedFilm.setText(result);
             else recommendedFilm.setText("Error: Please enter correct name of movie");
     }

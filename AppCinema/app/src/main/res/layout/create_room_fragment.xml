@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateRoomFragment">
+    tools:context=".CreateRoomFragment"
+    android:background="@drawable/bg">
 
     <Button
         android:id="@+id/b_start"
-        android:layout_width="162dp"
+        android:layout_width="160dp"
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="500dp"
         android:text="Create room"
         />
 
@@ -22,7 +22,7 @@
         android:layout_marginTop="100dp"
         android:padding="16dp"
         android:text="Hello my friend!"
-        android:textColor="?attr/colorError"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         />

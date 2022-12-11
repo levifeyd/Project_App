@@ -78,7 +78,6 @@ public class AddMovieFragment extends Fragment {
 
     private void showToast () {
         Activity activityObj = this.getActivity();
-        @SuppressLint("ShowToast")
         Toast toast = Toast.makeText(activityObj, "Please add movie", Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -88,7 +87,7 @@ public class AddMovieFragment extends Fragment {
         String result = ((EditText) allMovies.get(position).findViewById(R.id.editText)).getText().toString();
         AddMovieFragment fragment3 = new AddMovieFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("string", result);
+        bundle.putString("movie", result);
         fragment3.setArguments(bundle);
         navController.navigate(R.id.fragment4, bundle);
     }
