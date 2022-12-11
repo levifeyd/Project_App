@@ -77,11 +77,11 @@ public class AuthorizationFragment extends Fragment {
     }
 
     private boolean checkContainInDataBase(String password, String email) {
-        return true;
-//        String passwordFromDb = myDbManager.getFromDb(email);
-//        if (passwordFromDb != null)
-//            return passwordFromDb.equals(password);
-//        else return false;
+//        return true;
+        String passwordFromDb = myDbManager.getFromDb(email);
+        if (passwordFromDb != null)
+            return passwordFromDb.equals(password);
+        else return false;
     }
 
     private void authorization() {

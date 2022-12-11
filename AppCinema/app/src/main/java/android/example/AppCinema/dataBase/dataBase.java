@@ -1,11 +1,5 @@
 package android.example.AppCinema.dataBase;
 
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
-
 public class dataBase {
     public static final String TABLE_NAME = "Users";
     public static final String _ID = "_id";

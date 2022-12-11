@@ -15,7 +15,7 @@ public class MyDbManager {
         this.context = context;
         myDbHelper = new MyDbHelper(context);
     }
-    public void openDb(){
+    public void openDb() {
         db = myDbHelper.getWritableDatabase();
     }
     public void insertToDb(String email, String password) {
@@ -25,7 +25,7 @@ public class MyDbManager {
         db.insert(dataBase.TABLE_NAME, null, cv);
     }
 
-    public String getFromDb(String email){
+    public String getFromDb(String email) {
         db.execSQL(dataBase.TABLE_STRUCTURE);
         String password = null;
         String sqlQuery = "select email, password " + "from " + dataBase.TABLE_NAME +
