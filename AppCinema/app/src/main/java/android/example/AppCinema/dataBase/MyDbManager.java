@@ -42,36 +42,28 @@ public class MyDbManager {
         }
         return password;
     }
-    // for table MOVIES
-    public void insertToDbMovie(String user, String movie, String id) {
-        ContentValues cv = new ContentValues();
-        cv.put(dataBaseUsers._ID_MOVIE, id);
-        cv.put(dataBaseUsers.MOVIE, movie);
-        db.insert(dataBaseUsers.TABLE_NAME_MOVIE, null, cv);
-    }
-
-    public String getFromDbMovie(String id) {
-        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_MOVIE);
-        String sqlQuery = "select movie" + "from " + dataBaseUsers.TABLE_NAME_MOVIE +
-                " where _id = ?";
-        Cursor cursor = db.rawQuery(sqlQuery, new String[] {id});
-        return id;
-    }
     // for table USERS_MOVIES
-    public void insertToDbUsersMovie(String users_id, String movie_id) {
+    public void insertToDbUsersMovie(String users_id, String movie_id, int like) {
         ContentValues cv = new ContentValues();
         cv.put(dataBaseUsers._ID_USERS, users_id);
-        cv.put(dataBaseUsers._ID_MOVIE, movie_id);
+        cv.put(dataBaseUsers._ID_MOVIES, movie_id);
         db.insert(dataBaseUsers.TABLE_NAME_USERS_MOVIES, null, cv);
     }
 
-    public String getFromDbUsersMovie(String id) {
-        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_MOVIE);
-        String sqlQuery = "select _id_users" + "from "
-                + dataBaseUsers.TABLE_NAME_MOVIE +
-                " where _id_movies = ?";  // смотрим есть ли у этого юзера уже такой фильм
-        Cursor cursor = db.rawQuery(sqlQuery, new String[] {id});
-        return id;
+    public String getFromDbUsersMovie(String userId, String movieId) {
+        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_USERS_MOVIES);
+        String resultMovieId = null;
+        String sqlQuery = "select _id_users, _id_movies" + " from "
+                + dataBaseUsers.TABLE_NAME_USERS_MOVIES +
+                " where _id_movies = ?  AND _id_users = ?";  // смотрим есть ли у этого юзера уже такой фильм
+        Cursor cursor = db.rawQuery(sqlQuery, new String[] {movieId, userId});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                resultMovieId  = cursor.getString(1);
+            }
+            cursor.close();
+        }
+        return resultMovieId;
     }
 
     public void closeDb() {
@@ -81,7 +73,7 @@ public class MyDbManager {
     public void dropDb() {
         Cursor cursorUsers = db.rawQuery("DROP TABLE " + dataBaseUsers.TABLE_NAME_USERS, new String[] {});
         cursorUsers.close();
-        Cursor cursorMovies = db.rawQuery("DROP TABLE " + dataBaseUsers.TABLE_NAME_MOVIE, new String[] {});
+        Cursor cursorMovies = db.rawQuery("DROP TABLE " + dataBaseUsers.TABLE_NAME_USERS_MOVIES, new String[] {});
         cursorMovies.close();
     }
 }

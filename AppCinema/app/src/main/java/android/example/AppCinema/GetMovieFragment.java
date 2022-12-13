@@ -4,6 +4,8 @@ import static android.example.AppCinema.utils.NetworkUtils.generateURL;
 import static android.example.AppCinema.utils.NetworkUtils.getResponseFromURL;
 
 import android.annotation.SuppressLint;
+import android.example.AppCinema.dataBase.DBSingleton;
+import android.example.AppCinema.dataBase.MyDbManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -33,14 +35,19 @@ public class GetMovieFragment extends Fragment {
     private String category;
     private String URLImage;
     private ImageView imageView;
+    private MyDbManager myDbManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.get_movie_fragment, container, false);
-
         navController= NavHostFragment.findNavController(this);
         recommendedFilm = rootView.findViewById(R.id.tv_movie);
         imageView = rootView.findViewById(R.id.imageView_movie);
+
+        DBSingleton dbSingleton = new DBSingleton();
+        myDbManager = dbSingleton.getDb(getContext());
+        myDbManager.openDb();
+
         getFilters();
 
         URL generatedURL = generateURL(sinceYear, untilYear, category);
@@ -67,18 +74,22 @@ public class GetMovieFragment extends Fragment {
         @Override
         protected void onPostExecute(String response) {  // получаем ответ от сервера
             String name = null;
+            String id_movie = null;
+
             if (response != null && !response.equals("")) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     JSONArray jsonArray = jsonResponse.getJSONArray("docs");
-                    while ((name == null || name.equals("null")) || (URLImage.equals("null"))) {
+                    while ((name == null || name.equals("null")) || (URLImage.equals("null"))
+                            || myDbManager.getFromDbUsersMovie("1", id_movie) != null ) {
                         int position = (int) (Math.random() * jsonArray.length());
                         JSONObject movieInfo = jsonArray.getJSONObject(position);
                         name = movieInfo.getString("alternativeName");
-
+                        id_movie = movieInfo.getString("id");
                         JSONObject poster = movieInfo.getJSONObject("poster");
                         URLImage = poster.getString("url");
                     }
+                    myDbManager.insertToDbUsersMovie("1", id_movie, 1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

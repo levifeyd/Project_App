@@ -17,23 +17,19 @@ public class NetworkUtils {
 
     public static URL generateURL(String startYear, String endYear, String category) {
         Uri builtUri;
-        if (!category.equals("typeNumber")) {
-            builtUri = Uri.parse(KINO_API_BASE_URL + KINO_USERS_GET).buildUpon().appendQueryParameter(ACCESS_TOKEN, "GH51PY4-RTK4HQT-HXWFF8F-290HEDP")
-                    .appendQueryParameter("field", "year")
-                    .appendQueryParameter("search", startYear + '-' + endYear)
-                    .appendQueryParameter("field", "rating.kp")
-                    .appendQueryParameter("search", "7-10")
-                    .build();
-        } else {
-            builtUri = Uri.parse(KINO_API_BASE_URL + KINO_USERS_GET).buildUpon().appendQueryParameter(ACCESS_TOKEN, "GH51PY4-RTK4HQT-HXWFF8F-290HEDP")
-                    .appendQueryParameter("field", "year")
-                    .appendQueryParameter("search", startYear + '-' + endYear)
-                    .appendQueryParameter("field", "rating.kp")
-                    .appendQueryParameter("search", "7-10")
-                    .appendQueryParameter("field", category)
-                    .appendQueryParameter("search", "2")
-                    .build();
+        String typeNumber = "2";
+        if (category.equals("movie")) {
+            typeNumber = "1";
         }
+        builtUri = Uri.parse(KINO_API_BASE_URL + KINO_USERS_GET).buildUpon().appendQueryParameter(ACCESS_TOKEN, "GH51PY4-RTK4HQT-HXWFF8F-290HEDP")
+                .appendQueryParameter("field", "year")
+                .appendQueryParameter("search", startYear + '-' + endYear)
+                .appendQueryParameter("field", "rating.kp")
+                .appendQueryParameter("search", "7-10")
+                .appendQueryParameter("limit", "1000")
+                .appendQueryParameter("field", "typeNumber")
+                .appendQueryParameter("search", typeNumber)
+                .build();
         URL url = null;
         try {
             url = new URL(builtUri.toString());

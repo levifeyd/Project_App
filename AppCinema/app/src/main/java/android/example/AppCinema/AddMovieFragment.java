@@ -31,7 +31,7 @@ public class AddMovieFragment extends Fragment {
         Button serial = rootView.findViewById(R.id.radio_b_serial);
 
         movie.setOnClickListener(v -> categoryMovie = "movie");
-        serial.setOnClickListener(v-> categoryMovie = "typeNumber");
+        serial.setOnClickListener(v-> categoryMovie = "serial");
 
         Button randomButton = rootView.findViewById(R.id.button_random);
         randomButton.setOnClickListener(v -> navController.navigate(R.id.fragment4));

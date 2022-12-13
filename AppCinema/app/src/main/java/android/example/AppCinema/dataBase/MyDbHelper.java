@@ -16,15 +16,12 @@ public class MyDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(dataBaseUsers.TABLE_STRUCTURE_USERS);
-        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_MOVIE);
         db.execSQL(dataBaseUsers.TABLE_STRUCTURE_USERS_MOVIES);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(dataBaseUsers.DROP_TABLE);
-        db.execSQL(dataBaseUsers.DROP_TABLE_MOVIE);
         db.execSQL(dataBaseUsers.DROP_TABLE_USERS_MOVIE);
         onCreate(db);
     }
