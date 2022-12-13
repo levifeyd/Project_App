@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateRoomFragment"
-    android:background="#79111100">
+    android:background="#212042">
 
     <Button
         android:id="@+id/b_start"

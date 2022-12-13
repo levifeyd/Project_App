@@ -6,7 +6,7 @@
     android:paddingRight="100dp"
     android:paddingTop="10dp"
     tools:context=".AddMovieFragment"
-    android:background="#79111100"
+    android:background="#212042"
     >
 
 

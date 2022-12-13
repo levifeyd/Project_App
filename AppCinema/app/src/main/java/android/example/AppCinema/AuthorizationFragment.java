@@ -1,6 +1,7 @@
 package android.example.AppCinema;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.example.AppCinema.dataBase.DBSingleton;
 import android.example.AppCinema.dataBase.MyDbManager;
@@ -84,7 +85,7 @@ public class AuthorizationFragment extends Fragment {
 
     private boolean checkContainInDataBase(String password, String email) {
 //        return true;
-        String passwordFromDb = myDbManager.getFromDb(email);
+        String passwordFromDb = myDbManager.getFromDbUsers(email);
         if (passwordFromDb != null)
             return passwordFromDb.equals(password);
         else return false;
@@ -144,12 +145,11 @@ public class AuthorizationFragment extends Fragment {
             Snackbar.make(root, "Please enter correct password", Snackbar.LENGTH_SHORT).show();
             return;
         }
-        if (myDbManager.getFromDb(email_new.getText().toString()) == null) {
+        if (myDbManager.getFromDbUsers(email_new.getText().toString()) == null) {
             myDbManager.insertToDbUsers(email_new.getText().toString(), pass_new.getText().toString());
             Snackbar.make(root, "User create !", Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(root, "User with same email already exist!", Snackbar.LENGTH_SHORT).show();
         }
-
     }
 }
