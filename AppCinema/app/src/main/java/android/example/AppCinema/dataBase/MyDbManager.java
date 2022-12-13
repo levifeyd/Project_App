@@ -15,20 +15,37 @@ public class MyDbManager {
         this.context = context;
         myDbHelper = new MyDbHelper(context);
     }
+
     public void openDb() {
         db = myDbHelper.getWritableDatabase();
     }
-    public void insertToDb(String email, String password) {
+
+    public void insertToDbUsers(String email, String password) {
         ContentValues cv = new ContentValues();
-        cv.put(dataBase.EMAIL, email);
-        cv.put(dataBase.PASSWORD, password);
-        db.insert(dataBase.TABLE_NAME, null, cv);
+        cv.put(dataBaseUsers.EMAIL, email);
+        cv.put(dataBaseUsers.PASSWORD, password);
+        db.insert(dataBaseUsers.TABLE_NAME_USERS, null, cv);
+    }
+
+    public void insertToDbMovie(String user, String movie, String id) {
+        ContentValues cv = new ContentValues();
+        cv.put(dataBaseUsers._ID_MOVIE, id);
+        cv.put(dataBaseUsers.MOVIE, movie);
+        db.insert(dataBaseUsers.TABLE_NAME_MOVIE, null, cv);
+    }
+
+    public String getFromDbMovieId(String id) {
+        db.execSQL(dataBaseUsers.TABLE_NAME_MOVIE);
+        String sqlQuery = "select movie" + "from " + dataBaseUsers.TABLE_NAME_MOVIE +
+                " where _id = ?";
+        Cursor cursor = db.rawQuery(sqlQuery, new String[] {id});
+        return id;
     }
 
     public String getFromDb(String email) {
-        db.execSQL(dataBase.TABLE_STRUCTURE);
+        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_USERS);
         String password = null;
-        String sqlQuery = "select email, password " + "from " + dataBase.TABLE_NAME +
+        String sqlQuery = "select email, password " + "from " + dataBaseUsers.TABLE_NAME_USERS +
                 " where email = ?";
         Cursor cursor = db.rawQuery(sqlQuery, new String[] {email});
         if (cursor != null) {
@@ -45,7 +62,9 @@ public class MyDbManager {
     }
 
     public void dropDb(){
-        Cursor c = db.rawQuery("DROP TABLE " + dataBase.TABLE_NAME, new String[] {});
-        c.close();
+        Cursor cursorUsers = db.rawQuery("DROP TABLE " + dataBaseUsers.TABLE_NAME_USERS, new String[] {});
+        cursorUsers.close();
+        Cursor cursorMovies = db.rawQuery("DROP TABLE " + dataBaseUsers.TABLE_NAME_MOVIE, new String[] {});
+        cursorMovies.close();
     }
 }

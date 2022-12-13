@@ -85,7 +85,8 @@ public class AddMovieFragment extends Fragment {
     private boolean checkCorrectDate(String startYear, String endYear) { // start <= end
         int start = Integer.parseInt(startYear);
         int end = Integer.parseInt(endYear);
-            return start <= end;
+        return start <= end;
+
     }
 
     private void showToastDate() {

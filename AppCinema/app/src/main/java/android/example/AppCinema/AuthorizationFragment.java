@@ -1,6 +1,8 @@
 package android.example.AppCinema;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
+import android.example.AppCinema.dataBase.DBSingleton;
 import android.example.AppCinema.dataBase.MyDbManager;
 import android.os.Bundle;
 
@@ -35,8 +37,12 @@ public class AuthorizationFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
         initButtonsMailPass(rootView);
 
-        myDbManager = new MyDbManager(getContext());
+        DBSingleton dbSingleton = new DBSingleton();
+        myDbManager = dbSingleton.getDb(getContext());
         myDbManager.openDb();
+
+//        myDbManager = new MyDbManager(getContext());
+//        myDbManager.openDb();
 
         Button signIn = rootView.findViewById(R.id.buttomSignIn);
         signIn.setOnClickListener(view -> authorization());
@@ -139,7 +145,7 @@ public class AuthorizationFragment extends Fragment {
             return;
         }
         if (myDbManager.getFromDb(email_new.getText().toString()) == null) {
-            myDbManager.insertToDb(email_new.getText().toString(), pass_new.getText().toString());
+            myDbManager.insertToDbUsers(email_new.getText().toString(), pass_new.getText().toString());
             Snackbar.make(root, "User create !", Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(root, "User with same email already exist!", Snackbar.LENGTH_SHORT).show();

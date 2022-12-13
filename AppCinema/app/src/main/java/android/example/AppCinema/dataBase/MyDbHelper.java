@@ -10,17 +10,19 @@ import androidx.annotation.Nullable;
 public class MyDbHelper extends SQLiteOpenHelper {
 
     public MyDbHelper(@Nullable Context context) {
-        super(context, dataBase.DB_NAME, null, dataBase.DB_VERSION);
+        super(context, dataBaseUsers.DB_NAME, null, dataBaseUsers.DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(dataBase.TABLE_STRUCTURE);
+        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_USERS);
+        db.execSQL(dataBaseUsers.TABLE_STRUCTURE_MOVIE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(dataBase.DROP_TABLE);
+        db.execSQL(dataBaseUsers.DROP_TABLE);
+        db.execSQL(dataBaseUsers.DROP_TABLE_MOVIE);
         onCreate(db);
     }
 }

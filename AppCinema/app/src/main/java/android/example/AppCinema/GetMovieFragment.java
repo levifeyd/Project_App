@@ -4,6 +4,7 @@ import static android.example.AppCinema.utils.NetworkUtils.generateURL;
 import static android.example.AppCinema.utils.NetworkUtils.getResponseFromURL;
 
 import android.annotation.SuppressLint;
+import android.example.AppCinema.dataBase.MyDbManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -67,6 +68,7 @@ public class GetMovieFragment extends Fragment {
         @Override
         protected void onPostExecute(String response) {  // получаем ответ от сервера
             String name = null;
+            String _id = null;
             if (response != null && !response.equals("")) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
@@ -75,6 +77,8 @@ public class GetMovieFragment extends Fragment {
                         int position = (int) (Math.random() * jsonArray.length());
                         JSONObject movieInfo = jsonArray.getJSONObject(position);
                         name = movieInfo.getString("alternativeName");
+                        _id = movieInfo.getString("_id");
+
                         JSONObject poster = movieInfo.getJSONObject("poster");
                         URLImage = poster.getString("url");
                     }
@@ -100,3 +104,7 @@ public class GetMovieFragment extends Fragment {
         category = bundle.getString("movieOrSerial");
     }
 }
+
+// create new table with fileds user and movie
+
+//ID  movie
